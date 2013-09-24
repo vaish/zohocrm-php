@@ -79,7 +79,10 @@ class Response
 
   protected function parseResponse()
   {
-    $xml = new \SimpleXMLElement($this->xmlstr);
+    $xml = simplexml_load_string($this->xmlstr, 'SimpleXMLElement', LIBXML_NOERROR | LIBXML_NOWARNING);
+    if ($xml === false) {
+      throw new ZohoCRMException("Zoho CRM response could not be parsed as XML.");
+    }
 
     if (isset($xml->error)) {
       $message = (string) $xml->error->message;
