@@ -1,26 +1,70 @@
-<?php
+<?php namespace Zoho\CRM;
 
-namespace ZohoCRM;
+use Zoho\CRM\Common\HttpClientInterface;
+use Zoho\CRM\Common\FactoryInterface;
+use Zoho\CRM\Request\HttpClient;
+use Zoho\CRM\Request\Factory;
 
 /**
- * Zoho CRM API wrapper.
+ * Client for provide interface with Zoho CRM
+ *
+ * @version 1.0.0
  */
 class Client
 {
+  /**
+   * URL for call request
+   *
+   * @var string
+   */
   const BASE_URI = 'https://crm.zoho.com/crm/private';
 
+  /**
+   * Token used for session of request
+   * 
+   * @var string
+   */
   protected $authtoken;
+
+  /**
+   * Instance of the client
+   * 
+   * @var HttpClientInterface
+   */
   protected $client;
+
+  /**
+   * Instance of the factory
+   * 
+   * @var FactoryInterface
+   */
   protected $factory;
+
+  /**
+   * Format selected for get request
+   * 
+   * @var string
+   */
   protected $format;
+
+  /**
+   * Module selected for get request
+   * 
+   * @var string
+   */
   protected $module;
 
+  /**
+   * Construct
+   * @param string $authtoken Token for connection
+   * @param HttpClientInterface $client HttpClient for connection [optional]
+   * @param FactotoryInterface $factory [optional]
+   */
   public function __construct($authtoken, HttpClientInterface $client = null, FactoryInterface $factory = null)
   {
     $this->authtoken = $authtoken;
     // Only XML format is supported for the time being
-    $this->format = 'xml';
-    
+    $this->format = 'xml';    
     $this->client = $client ?: new HttpClient();
     $this->factory = $factory ?: new Factory();
   }

@@ -1,10 +1,12 @@
-<?php
+<?php namespace Zoho\CRM\Request;
 
-namespace ZohoCRM;
+use Zoho\CRM\Common\HttpClientInterface;
 
 /**
  * Simple cURL based HTTP Client.
  * Sends API calls to Zoho server.
+ *
+ * @version 1.0.0
  */
 class HttpClient implements HttpClientInterface
 {
@@ -77,6 +79,7 @@ class HttpClient implements HttpClientInterface
 
     //curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, 0);
     //curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($this->curl, CURLOPT_SSL_CIPHER_LIST, 'rsa_rc4_128_sha');
   }
 
 }
