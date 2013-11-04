@@ -424,8 +424,9 @@ class Client
 	}
 
 	public function generateXML()
-	{
+	{}
 
-	}  
+	public function generateArray()
+	{}  
 
 }
