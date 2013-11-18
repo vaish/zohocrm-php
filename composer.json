@@ -21,7 +21,7 @@
 
     "autoload": {
         "psr-0": {
-            "Zoho\\": "src/"
+            "Zoho\\": "zohocrm-php/zohocrm-php/src/"
         }
     },
 
