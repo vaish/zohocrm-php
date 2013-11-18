@@ -1,4 +1,4 @@
-<?php namespace Zoho\CRM\Response;
+<?php namespace Zoho\CRM\Wrapper;
 
 /**
  * Common interface for response creators

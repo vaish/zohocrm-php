@@ -1,6 +1,4 @@
-<?php
-
-namespace ZohoCRM;
+<?php namespace Zoho\CRM\Wrapper;
 
 /**
  * Zoho CRM API Response.

@@ -10,7 +10,7 @@ use Zoho\CRM\Request\Factory;
 *
 * @version 1.0.0
 */
-class Client
+class ZohoClient
 {
 	/**
 	 * URL for call request
