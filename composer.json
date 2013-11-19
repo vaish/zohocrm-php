@@ -15,8 +15,7 @@
 
     "require": {
         "php": ">=5.3.3",
-        "ext-curl": "*",
-        "sabre/xml": "dev-master"
+        "ext-curl": "*"
     },
 
     "autoload": {

@@ -1,6 +1,6 @@
 <?php namespace Zoho\CRM\Entities;
 
-use Sabre\XML;
+use Zoho\CRM\Wrapper\Element;
 
 /**
  * Entity for leads inside Zoho
@@ -8,7 +8,7 @@ use Sabre\XML;
  *
  * @version 1.0.0
  */
-class Lead implements XML\Element
+class Lead extends Element 
 {
 	/**
 	 * Zoho CRM user to whom the Lead is assigned.
@@ -101,7 +101,6 @@ class Lead implements XML\Element
 	 * @var string
 	 */	
 	private $email;
-
 
 	/**
 	 * Secundary email address of the lead
@@ -224,49 +223,5 @@ class Lead implements XML\Element
 	{
 		$this->$property = $value;
 		return $this->$property;
-	}
-
-    /**
-     * The serialize method is called during xml writing.
-     *
-     * It should use the $writer argument to encode this object into XML.
-     *
-     * Important note: it is not needed to create the parent element. The
-     * parent element is already created, and we only have to worry about
-     * attributes, child elements and text (if any).
-     *
-     * @param XML\Writer $reader
-     * @return void
-     */
-    public function serializeXml(XML\Writer $writer) 
-    {
-        $writer->writeAttribute('href', $this->href);
-        $writer->writeAttribute('rel', $this->rel);
-        $writer->writeAttribute('type', $this->type);
-    }
-
-    /**
-     * The deserialize method is called during xml parsing.
-     *
-     * This method is called statictly, this is because in theory this method
-     * may be used as a type of constructor, or factory method.
-     *
-     * Often you want to return an instance of the current class, but you are
-     * free to return other data as well.
-     *
-     * @param XML\Reader $reader
-     * @return mixed
-     */
-    static public function deserializeXml(XML\Reader $reader) 
-    {
-        $attributes = $reader->parseAttributes();
-        $link = new self();
-        foreach($attributes as $name=>$value) {
-            if (property_exists($link,$name)) {
-                $link->$name = $value;
-            }
-        }
-        $reader->next();
-        return $link;
-    }	
+	}	
 }
