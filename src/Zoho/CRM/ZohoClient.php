@@ -85,7 +85,7 @@ class ZohoClient
 	 *
 	 * @return Response The Response object
 	 */  
-	public function convertLead($leadId, $data, $params = array())
+	public function convertLead($leadId, $data, $params = array(), $options = array())
 	{
 		$params['leadId'] = $leadId;
 		return $this->call('convertLead', $params, $data);
@@ -109,7 +109,7 @@ class ZohoClient
 	 *
 	 * @return Response The Response object
 	 */
-	public function getCVRecords($name, $params = array())
+	public function getCVRecords($name, $params = array(), $options = array())
 	{
 		$params['cvName'] = $name;
 		return $this->call('getCVRecords', $params);
@@ -150,7 +150,7 @@ class ZohoClient
 	 *
 	 * @return Response The Response object
 	 */
-	public function getRecordById($id, $params = array())
+	public function getRecordById($id, $params = array(), $options = array())
 	{
 		$params['id'] = $id;
 		return $this->call('getRecordById', $params);
@@ -176,7 +176,7 @@ class ZohoClient
 	 *
 	 * @return Response The Response object
 	 */  
-	public function getRecords($params = array())
+	public function getRecords($params = array(), $options = array())
 	{
 		return $this->call('getRecords', $params);
 	}
@@ -199,7 +199,7 @@ class ZohoClient
 	 *
 	 * @return Response The Response object
 	 */
-	public function getSearchRecords($searchCondition, $params = array())
+	public function getSearchRecords($searchCondition, $params = array(), $options = array())
 	{
 		$params['searchCondition'] = $searchCondition;
 		if(empty($params['selectColumns'])) {
@@ -253,7 +253,7 @@ class ZohoClient
 	 *
 	 * @return Response The Response object
 	 */ 
-	public function insertRecords($data, $params = array())
+	public function insertRecords($data, $params = array(), $options = array())
 	{
 		if (!isset($params['duplicateCheck'])) {
 	// @todo: make default value for duplicateCheck configurable
@@ -263,7 +263,7 @@ class ZohoClient
 			$params['version'] = 4;
 		}
 
-		return $this->call('insertRecords', $params, $data);
+		return $this->call('insertRecords', $params, $data, $options);
 	}
 
 	/**
@@ -283,7 +283,7 @@ class ZohoClient
 	 *
 	 * @return Response The Response object
 	 */
-	public function updateRecords($id, $data, $params = array())
+	public function updateRecords($id, $data, $params = array(), $options = array())
 	{
 		if (count($data['records']) > 1) {
 	// Version 4 is mandatory for updating multiple records.
@@ -327,11 +327,12 @@ class ZohoClient
 	 * @param array $data Data to send [optional]
 	 * @return Response
 	 */
-	protected function call($command, $params, $data = array())
+	protected function call($command, $params, $data = array(), $options = array())
 	{
 		$uri = $this->getRequestURI($command);
-		$body = $this->getRequestBody($params, $data);
+		$body = $this->getRequestBody($params, $data, $options);
 
+		// Make the request to web service
 		$xml = $this->client->post($uri, $body);
 		return $this->factory->createResponse($xml, $this->module, $command);
 	}
@@ -359,19 +360,13 @@ class ZohoClient
 	 * @param Object $data Data
 	 * @return string
 	 */
-	protected function getRequestBody($params, $data)
+	protected function getRequestBody($params, $data, $options)
 	{
 		$params['scope'] = 'crmapi';
 		$params['authtoken'] = $this->authtoken;
-		$params += array(
-			'newFormat' => 1,
-	//'version' => 2,
-			);
-
-		if (!empty($data)) {
-			$params['xmlData'] = $this->toXML($data);
-		}
-
+		$params += array('newFormat' => 1); //'version' => 2,
+		if (!empty($data))
+			$params['xmlData'] = (isset($options['map']) && $options['map'])?$this->toXML($data) :$data;
 		return http_build_query($params, '', '&');
 	}
 
