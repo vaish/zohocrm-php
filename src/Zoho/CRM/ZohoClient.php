@@ -64,10 +64,11 @@ class ZohoClient
 	public function __construct($authtoken, HttpClientInterface $client = null, FactoryInterface $factory = null)
 	{
 		$this->authtoken = $authtoken;
-	// Only XML format is supported for the time being
+		// Only XML format is supported for the time being
 		$this->format = 'xml';    
 		$this->client = $client ?: new HttpClient();
 		$this->factory = $factory ?: new Factory();
+		return $this;
 	}
 
 	/**
@@ -434,11 +435,12 @@ class ZohoClient
 	 */
 	public function mapEntity(Element $entity)
 	{
+		if(empty($this->module))
+			throw new \Exception("Invalid module, it must be setted before map the entity", 1);			
 		$element = new \ReflectionObject($entity);
-		$properties = $element->getProperties(\ReflectionProperty::IS_PRIVATE);
-		$root = isset($data['root']) ? $data['root'] : $this->module;
+		$properties = $element->getProperties();
 		$no = 1;
-		$xml = '<'. $root .'>';
+		$xml = '<'.$this->module.'>';
 		if (isset($data['options'])) {
 			$xml .= '<row no="'. $no .'">';
 			foreach ($data['options'] as $key => $value)
@@ -448,9 +450,11 @@ class ZohoClient
 		}
 		$xml .= '<row no="'. $no .'">';
 		foreach ($properties as $property)
-			$xml .= '<FL val="'. $property .'"><![CDATA['.$entity->$property.']]></FL>';			
-		$xml .= '</row>';
-		$xml .= '</'.$root.'>';
+		{
+			$propName = $property->getName();
+			$xml .= '<FL val="'.str_replace('_', ' ', $propName).'"><![CDATA['.$entity->$propName.']]></FL>';					
+		} $xml .= '</row>';
+		$xml .= '</'.$this->module.'>';
 		return $xml;
 	}
 }

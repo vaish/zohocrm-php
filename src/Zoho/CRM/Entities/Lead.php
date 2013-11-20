@@ -15,35 +15,35 @@ class Lead extends Element
 	 * 
 	 * @var string
 	 */
-	private $leadOwner;
+	private $Lead_Owner;
 
 	/**
 	 * Salutation for the lead
 	 * 
 	 * @var string
 	 */
-	private $salutation;
+	private $Salutation;
 
 	/**
 	 * First name of the lead
 	 * 
 	 * @var string
 	 */
-	private $firstName;
+	private $First_Name;
 
 	/**
 	 * The job position of the lead
 	 * 
 	 * @var string
 	 */
-	private $title;
+	private $Title;
 
 	/**
 	 * Last name of the lead
 	 * 
 	 * @var string
 	 */	
-	private $lastName;
+	private $Last_Name;
 
 	/**
 	 * Name of the company where the lead is working. 
@@ -51,63 +51,63 @@ class Lead extends Element
 	 * 
 	 * @var string
 	 */
-	private $company;
+	private $Company;
 
 	/**
 	 * Source of the lead, that is, from where the lead is generated
 	 * 
 	 * @var string
 	 */
-	private $leadSouce;
+	private $Lead_Souce;
 
 	/**
 	 * Industry to which the lead belongs
 	 * 
 	 * @var string
 	 */
-	private $industry;
+	private $Industry;
 
 	/**
 	 * Annual revenue of the company where the lead is working
 	 * 
 	 * @var integer
 	 */
-	private $annualRevenue;
+	private $Annual_Revenue;
 
 	/**
 	 * Phone number of the lead
 	 * 
 	 * @var string
 	 */
-	private $phone;
+	private $Phone;
 
 	/**
 	 * Modile number of the lead
 	 * 
 	 * @var string
 	 */	
-	private $mobile;
+	private $Mobile;
 
 	/**
 	 * Fax number of the lead
 	 * 
 	 * @var string
 	 */	
-	private $fax;
+	private $Fax;
 
 	/**
 	 * Email address of the lead
 	 * 
 	 * @var string
 	 */	
-	private $email;
+	private $Email;
 
 	/**
 	 * Secundary email address of the lead
 	 * 
 	 * @var string
 	 */	
-	private $emailSecundary;
+	private $Secundary_Email;
 
 	/**
 	 * Skype ID of the lead. Currently skype ID 
@@ -115,35 +115,35 @@ class Lead extends Element
 	 * 
 	 * @var string
 	 */
-	private $skypeId;
+	private $Skype_ID;
 
 	/**
 	 * Web site of the lead
 	 * 
 	 * @var string
 	 */
-	private $website;
+	private $Website;
 
 	/**
 	 * Status of the lead
 	 * 
 	 * @var string
 	 */
-	private $leadStatus;
+	private $Lead_Status;
 
 	/**
 	 * Rating of the lead
 	 * 
 	 * @var string
 	 */
-	private $rating;
+	private $Rating;
 
 	/**
 	 * Number of employees in lead's company
 	 * 
 	 * @var integer
 	 */
-	private $noEmployees;
+	private $No_of_Employees;
 
 	/**
 	 * Remove leads from your mailing list so that they will 
@@ -151,56 +151,56 @@ class Lead extends Element
 	 * 
 	 * @var string
 	 */
-	private $emailOpt;
+	private $Email_Opt_Out;
 
 	/**
 	 * Campaign related to the Lead
 	 * 
 	 * @var string
 	 */
-	private $campaingSource;
+	private $Campaing_Source;
 
 	/**
 	 * Street address of the lead
 	 * 
 	 * @var string
 	 */
-	private $street;
+	private $Street;
 
 	/**
 	 * Name of the city where the lead lives
 	 * 
 	 * @var string
 	 */
-	private $city;
+	private $City;
 
 	/**
 	 * Name of the state where the lead lives
 	 * 
 	 * @var string
 	 */
-	private $state;
+	private $State;
 
 	/**
 	 * Postal code of the lead's address
 	 * 
 	 * @var string
 	 */
-	private $zipCode;
+	private $Zip_Code;
 
 	/**
 	 * Name of the lead's country
 	 * 
 	 * @var string
 	 */
-	private $country;
+	private $Country;
 
 	/**
 	 * Other details about the lead
 	 * 
 	 * @var string
 	 */
-	private $description;
+	private $Description;
 
 	/**
 	 * Getter
