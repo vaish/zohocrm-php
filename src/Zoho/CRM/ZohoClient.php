@@ -4,6 +4,7 @@ use Zoho\CRM\Common\HttpClientInterface;
 use Zoho\CRM\Common\FactoryInterface;
 use Zoho\CRM\Request\HttpClient;
 use Zoho\CRM\Request\Factory;
+use Zoho\CRM\Wrapper\Element;
 
 /**
 * Client for provide interface with Zoho CRM
@@ -423,10 +424,33 @@ class ZohoClient
 		return $xml;
 	}
 
-	public function generateXML()
-	{}
-
-	public function generateArray()
-	{}  
-
+	/**
+	 * Convert an entity into XML
+	 * 
+	 * @param Element $entity Element with values on fields setted
+	 * @return string XML created
+	 * @todo
+	 		- Add iteration for multiples entities and creation of xml with collection
+	 */
+	public function mapEntity(Element $entity)
+	{
+		$element = new \ReflectionObject($entity);
+		$properties = $element->getProperties(\ReflectionProperty::IS_PRIVATE);
+		$root = isset($data['root']) ? $data['root'] : $this->module;
+		$no = 1;
+		$xml = '<'. $root .'>';
+		if (isset($data['options'])) {
+			$xml .= '<row no="'. $no .'">';
+			foreach ($data['options'] as $key => $value)
+				$xml .= '<option val="'. $key .'">'. $value .'</option>';
+			$xml .= '</row>';
+			$no++;
+		}
+		$xml .= '<row no="'. $no .'">';
+		foreach ($properties as $property)
+			$xml .= '<FL val="'. $property .'"><![CDATA['.$entity->$property.']]></FL>';			
+		$xml .= '</row>';
+		$xml .= '</'.$root.'>';
+		return $xml;
+	}
 }
