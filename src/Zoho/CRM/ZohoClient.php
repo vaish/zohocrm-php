@@ -253,18 +253,18 @@ class ZohoClient
 	 *
 	 * @param array $options Options to add for configurations [optional]
 	 * @return Response The Response object
+	 * @todo
+	 		- Make default value for duplicateCheck configurable
 	 */ 
 	public function insertRecords($data, $params = array(), $options = array())
 	{
 		if (!isset($params['duplicateCheck'])) {
-	// @todo: make default value for duplicateCheck configurable
+	// 
 			$params['duplicateCheck'] = 1;
 		}
-		if (!isset($params['version']) && count($data['records']) > 1) {
+		if (!isset($params['version']) && isset($data['records']) && count($data['records']) > 1) {
 			$params['version'] = 4;
-		}
-
-		return $this->call('insertRecords', $params, $data, $options);
+		} return $this->call('insertRecords', $params, $data, $options);
 	}
 
 	/**

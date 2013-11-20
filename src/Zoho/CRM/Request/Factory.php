@@ -1,6 +1,7 @@
 <?php namespace Zoho\CRM\Request;
 
 use Zoho\CRM\Common\FactoryInterface;
+use Zoho\CRM\Request\Response;
 
 /**
  * Interface for create response objects
