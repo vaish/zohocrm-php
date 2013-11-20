@@ -82,7 +82,7 @@ class ZohoClient
 	 *                                  2 - include fields with null values in the response
 	 *                        version   1 (default) - use earlier API implementation
 	 *                                  2 - use latest API implementation
-	 *
+	 * @param array $options Options to add for configurations [optional]
 	 * @return Response The Response object
 	 */  
 	public function convertLead($leadId, $data, $params = array(), $options = array())
@@ -106,7 +106,7 @@ class ZohoClient
 	 *                                                  2 - include fields with null values in the response
 	 *                        version           Integer 1 (default) - use earlier API implementation
 	 *                                                   2 - use latest API implementation
-	 *
+	 * @param array $options Options to add for configurations [optional]
 	 * @return Response The Response object
 	 */
 	public function getCVRecords($name, $params = array(), $options = array())
@@ -147,7 +147,7 @@ class ZohoClient
 	 *                                  2 - include fields with null values in the response
 	 *                        version   1 (default) - use earlier API implementation
 	 *                                  2 - use latest API implementation
-	 *
+	 * @param array $options Options to add for configurations [optional]
 	 * @return Response The Response object
 	 */
 	public function getRecordById($id, $params = array(), $options = array())
@@ -173,7 +173,7 @@ class ZohoClient
 	 *                                                  2 - include fields with null values in the response
 	 *                        version           Integer	1 (default) - use earlier API implementation
 	 *                                                  2 - use latest API implementation
-	 *
+	 * @param array $options Options to add for configurations [optional]
 	 * @return Response The Response object
 	 */  
 	public function getRecords($params = array(), $options = array())
@@ -251,6 +251,7 @@ class ZohoClient
 	 *                                                It's recommended to use version 4 for inserting multiple records
 	 *                                                even when duplicate check is turned off.
 	 *
+	 * @param array $options Options to add for configurations [optional]
 	 * @return Response The Response object
 	 */ 
 	public function insertRecords($data, $params = array(), $options = array())
@@ -281,6 +282,7 @@ class ZohoClient
 	 *                                                2 - use latest API implementation
 	 *                                                4 - update multiple records in a single API method call
 	 *
+	 * @param array $options Options to add for configurations [optional]
 	 * @return Response The Response object
 	 */
 	public function updateRecords($id, $data, $params = array(), $options = array())
@@ -325,6 +327,7 @@ class ZohoClient
 	 * @param string $command Command to call
 	 * @param string $params Options
 	 * @param array $data Data to send [optional]
+	 * @param array $options Options to add for configurations [optional]
 	 * @return Response
 	 */
 	protected function call($command, $params, $data = array(), $options = array())
