@@ -13,16 +13,29 @@ abstract class Element
      */
     final public function deserializeXml($xmlstr) 
     {
-    	try
-    	{
+    	try {
 			$element = new \SimpleXMLElement($xmlstr);		
-    	} catch(\Exception $ex)
-    	{
+    	} catch(\Exception $ex) {
     		return false;
     	} foreach($element as $name => $value)
 			$this->$name = $value;
 		return true;
     }
-    // final public function serializeXml() 
-    // {}
+
+    /**
+     * Called during array to xml parsing, create an string 
+     * of the xml to send for api based on the request values
+     *
+     * @param array $fields Fields to convert
+     * @return string
+     */
+    final public function serializeXml(array $fields) 
+    {
+        $output = '<Lead>';
+        foreach ($fields as $key => $value) {
+            $key = str_replace(' ', '_', ucwords(str_replace('_', ' ', $key)));
+            $output .= '<'.$key.'>'.$value.'</'.$key.'>';
+        } $output .= '<Lead>';
+        return $output;
+    }
 }
