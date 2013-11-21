@@ -1,5 +1,7 @@
 <?php namespace Zoho\CRM\Request;
 
+use Zoho\CRM\Exception\ZohoCRMException;
+
 /**
  * Zoho CRM API Response.
  * 
