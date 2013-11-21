@@ -35,7 +35,7 @@ abstract class Element
         foreach ($fields as $key => $value) {
             $key = str_replace(' ', '_', ucwords(str_replace('_', ' ', $key)));
             $output .= '<'.$key.'>'.$value.'</'.$key.'>';
-        } $output .= '<Lead>';
+        } $output .= '</Lead>';
         return $output;
     }
 }

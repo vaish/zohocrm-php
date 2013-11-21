@@ -19,12 +19,15 @@ simple, but rather very powerful for complex XML applications.
 Installation
 ------------
 
-Using composer just add this to your composer.json:
+Using by composer, just add this parameters to your `composer.json` **using like repository, no composer package, composer it's just for installation**:
 ```json
 	"require": {
 		"zohocrm-php/zohocrm-php": "dev-master"
 	},
 	"autoload": {
+		"classmap": [
+			"vendor/zohocrm-php/zohocrm-php/src/"
+		],	
 		"psr-0": {
 			"Zoho\\": "zohocrm-php/zohocrm-php/src/"
 		}
