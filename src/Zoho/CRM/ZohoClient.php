@@ -202,10 +202,8 @@ class ZohoClient
 	public function getSearchRecords($searchCondition, $params = array(), $options = array())
 	{
 		$params['searchCondition'] = $searchCondition;
-		if(empty($params['selectColumns'])) {
+		if(empty($params['selectColumns']))
 			$params['selectColumns'] = 'All';
-		}
-
 		return $this->call('getSearchRecords', $params);
 	}
 
@@ -227,7 +225,6 @@ class ZohoClient
 	{
 		$params['type'] = $type;
 		$params['newFormat'] = $newFormat;
-
 		return $this->call('getUsers', $params);
 	}
 
@@ -261,9 +258,8 @@ class ZohoClient
 		// if (!isset($params['duplicateCheck'])) {
 		// 	$params['duplicateCheck'] = 1;
 		// }
-		if (!isset($params['version']) && isset($data['records']) && count($data['records']) > 1) {
-			$params['version'] = 4;
-		} return $this->call('insertRecords', $params, $data, $options);
+		if (!isset($params['version']) && isset($data['records']) && count($data['records']) > 1) $params['version'] = 4;
+		return $this->call('insertRecords', $params, $data, $options);
 	}
 
 	/**
@@ -287,17 +283,14 @@ class ZohoClient
 	public function updateRecords($id, $data, $params = array(), $options = array())
 	{
 		if (count($data['records']) > 1) {
-	// Version 4 is mandatory for updating multiple records.
+			// Version 4 is mandatory for updating multiple records.
 			$params['version'] = 4;
-		}
-		else {
-			if (empty($id)) {
+		} else
+		{
+			if (empty($id))
 				throw new \InvalidArgumentException('Record Id is required and cannot be empty.');
-			}
 			$params['id'] = $id;
-		}
-
-		return $this->call('updateRecords', $params, $data);
+		} return $this->call('updateRecords', $params, $data);
 	}
 
 	/**
@@ -333,9 +326,7 @@ class ZohoClient
 	{
 		$uri = $this->getRequestURI($command);
 		$body = $this->getRequestBody($params, $data, $options);
-
-		// Make the request to web service
-		$xml = $this->client->post($uri, $body);
+		$xml = $this->client->post($uri, $body); // Make the request to web service
 		return $this->factory->createResponse($xml, $this->module, $command);
 	}
 
@@ -349,9 +340,7 @@ class ZohoClient
 	{
 		if (empty($this->module)) {
 			throw new \RuntimeException('Zoho CRM module is not set.');
-		}
-
-		$parts = array(self::BASE_URI, $this->format, $this->module, $command);
+		} $parts = array(self::BASE_URI, $this->format, $this->module, $command);
 		return implode('/', $parts);
 	}
 
@@ -380,12 +369,9 @@ class ZohoClient
 	 */
 	protected function toXML($data)
 	{
-
 		$root = isset($data['root']) ? $data['root'] : $this->module;
-
 		$no = 1;
 		$xml = '<'. $root .'>';
-
 		if (isset($data['options'])) {
 			$xml .= '<row no="'. $no .'">';
 			foreach ($data['options'] as $key => $value) {
@@ -394,7 +380,6 @@ class ZohoClient
 			$xml .= '</row>';
 			$no++;
 		}
-
 		foreach ($data['records'] as $row) {
 			$xml .= '<row no="'. $no .'">';
 			foreach ($row as $key => $value) {
@@ -409,8 +394,7 @@ class ZohoClient
 						$xml .= '</'. $tag .'>';
 					}
 					$xml .= '</FL>';
-				}
-				else {
+				} else {
 					$xml .= '<FL val="'. $key .'"><![CDATA['. $value .']]></FL>';
 				}
 			}
@@ -418,7 +402,6 @@ class ZohoClient
 			$no++;
 		}
 		$xml .= '</'. $root .'>';
-
 		return $xml;
 	}
 
@@ -444,8 +427,7 @@ class ZohoClient
 				$xml .= '<option val="'. $key .'">'. $value .'</option>';
 			$xml .= '</row>';
 			$no++;
-		}
-		$xml .= '<row no="'. $no .'">';
+		} $xml .= '<row no="'. $no .'">';
 		foreach ($properties as $property)
 		{
 			$propName = $property->getName();
