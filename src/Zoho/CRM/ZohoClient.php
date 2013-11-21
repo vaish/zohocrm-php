@@ -258,10 +258,9 @@ class ZohoClient
 	 */ 
 	public function insertRecords($data, $params = array(), $options = array())
 	{
-		if (!isset($params['duplicateCheck'])) {
-	// 
-			$params['duplicateCheck'] = 1;
-		}
+		// if (!isset($params['duplicateCheck'])) {
+		// 	$params['duplicateCheck'] = 1;
+		// }
 		if (!isset($params['version']) && isset($data['records']) && count($data['records']) > 1) {
 			$params['version'] = 4;
 		} return $this->call('insertRecords', $params, $data, $options);

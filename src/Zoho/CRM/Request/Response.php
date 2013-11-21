@@ -287,4 +287,11 @@ class Response
     ksort($records);
     $this->records = $records;
   }
+
+  public function ifSuccess()
+  {
+    if(strpos($this->message, 'success') !== false)
+      return true;
+    return false;
+  }
 }
