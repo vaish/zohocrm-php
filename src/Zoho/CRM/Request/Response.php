@@ -1,6 +1,6 @@
-<?php
+<?php namespace Zoho\CRM\Request;
 
-namespace ZohoCRM;
+use Zoho\CRM\Exception\ZohoCRMException;
 
 /**
  * Zoho CRM API Response.
@@ -11,13 +11,59 @@ namespace ZohoCRM;
  */
 class Response
 {
+  /**
+   * Code error
+   * 
+   * @var string
+   */
   protected $code;
+
+  /**
+   * Message of the error
+   * 
+   * @var string
+   */
   protected $message;
+
+  /**
+   * Method used
+   * 
+   * @var string
+   */
   protected $method;
+
+  /**
+   * Module used
+   * 
+   * @var string
+   */
   protected $module;
+
+  /**
+   * Records details affecteds
+   * 
+   * @var array
+   */
   protected $records = array();
+
+  /**
+   * Specific redord affected
+   * 
+   * @var string
+   */
   protected $recordId;
+
+  /**
+   * URL used for the request
+   * 
+   * @var string
+   */
   protected $uri;
+
+  /**
+   * XML on request
+   * @var string
+   */
   protected $xmlstr;
 
   public function __construct($xmlstr, $module, $method)
@@ -25,7 +71,6 @@ class Response
     $this->xmlstr = $xmlstr;
     $this->module = $module;
     $this->method = $method;
-
     $this->parseResponse();
   }
 
@@ -243,5 +288,12 @@ class Response
     }
     ksort($records);
     $this->records = $records;
+  }
+
+  public function ifSuccess()
+  {
+    if(strpos($this->message, 'success') !== false)
+      return true;
+    return false;
   }
 }

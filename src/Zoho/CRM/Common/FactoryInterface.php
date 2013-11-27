@@ -1,7 +1,10 @@
-<?php
+<?php namespace Zoho\CRM\Common;
 
-namespace ZohoCRM;
-
+/**
+ * Common interface for create response
+ *
+ * @version 1.0.0
+ */
 interface FactoryInterface
 {
   
