@@ -126,7 +126,7 @@ class Response
   {
     $xml = simplexml_load_string($this->xmlstr, 'SimpleXMLElement', LIBXML_NOERROR | LIBXML_NOWARNING);
     if ($xml === false) {
-      throw new ZohoCRMException("Zoho CRM response could not be parsed as XML.");
+      throw new ZohoCRMException("Zoho CRM response could not be parsed as XML.", 0000);
     }
 
     if (isset($xml->error)) {

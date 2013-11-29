@@ -6,6 +6,7 @@
 class ZohoCRMException extends \Exception
 {
   protected $errorMessages = array(
+   '0000'  => 'Unknown error',
    '4000'  => 'Please use Authtoken, instead of API ticket and API key.',
    '4500'  => 'Internal server error while processing this request.',
    '4501'  => 'API Key is inactive.',
