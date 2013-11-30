@@ -33,6 +33,7 @@ abstract class Element
     {
         $output = '<Lead>';
         foreach ($fields as $key => $value) {
+            if(empty($value)) continue; // Unnecessary fields
             $key = str_replace(' ', '_', ucwords(str_replace('_', ' ', $key)));
             $output .= '<'.$key.'>'.$value.'</'.$key.'>';
         } $output .= '</Lead>';
