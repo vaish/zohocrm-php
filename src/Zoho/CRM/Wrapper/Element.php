@@ -18,7 +18,7 @@ abstract class Element
     	} catch(\Exception $ex) {
     		return false;
     	} foreach($element as $name => $value)
-			$this->$name = $value;
+			$this->$name = htmlspecialchars_decode($value);
 		return true;
     }
 
@@ -35,7 +35,7 @@ abstract class Element
         foreach ($fields as $key => $value) {
             if(empty($value)) continue; // Unnecessary fields
             $key = str_replace(' ', '_', ucwords(str_replace('_', ' ', $key)));
-            $output .= '<'.$key.'>'.$value.'</'.$key.'>';
+            $output .= '<'.$key.'>'.htmlspecialchars($value).'</'.$key.'>';
         } $output .= '</Lead>';
         return $output;
     }
