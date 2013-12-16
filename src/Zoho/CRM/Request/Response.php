@@ -76,6 +76,7 @@ class Response
 
   /**
    * Setters & Getters
+   * 
    */
   public function getModule()
   {
