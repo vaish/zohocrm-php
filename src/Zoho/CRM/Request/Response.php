@@ -3,7 +3,7 @@
 use Zoho\CRM\Exception\ZohoCRMException;
 
 /**
- * Zoho CRM API Response.
+ * Zoho CRM API Response. 
  * 
  * Parses the ZohoCRM response into an object and
  * normalizes different response formats.
