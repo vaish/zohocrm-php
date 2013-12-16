@@ -74,6 +74,9 @@ class Response
     $this->parseResponse();
   }
 
+  /**
+   * Setters & Getters
+   */
   public function getModule()
   {
     return $this->module;
