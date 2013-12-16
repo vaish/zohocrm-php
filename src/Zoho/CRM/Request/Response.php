@@ -119,6 +119,7 @@ class Response
       'uri' => $this->uri,
       'recordId' => $this->recordId,
       'records' => $this->records,
+      'xmlstr' => $this->xmlstr
     );
   }
 
