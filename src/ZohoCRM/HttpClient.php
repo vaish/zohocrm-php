@@ -8,9 +8,34 @@ namespace ZohoCRM;
  */
 class HttpClient implements HttpClientInterface
 {
+  /**
+   * cURL handle.
+   */
   protected $curl;
-  protected $timeout = 5;
-  protected $retry = 2;
+
+  /**
+   * cURL option CURLOPT_TIMEOUT.
+   * The maximum number of seconds to allow cURL functions to execute.
+   *
+   * @var int
+   */
+  protected $timeout = 30;
+
+  /**
+   * cURL option CURLOPT_CONNECTTIMEOUT.
+   * The number of seconds to wait while trying to connect.
+   * Use 0 to wait indefinitely.
+   *
+   * @var int
+   */
+  protected $connectTimeout = 5;
+
+  /**
+   * Number of times cURL will try to connect.
+   *
+   * @var int
+   */
+  protected $retry = 1;
 
   /**
    * HTTP response code returned by cURL request.
@@ -117,12 +142,23 @@ class HttpClient implements HttpClientInterface
     if (is_numeric($timeout)) {
       $this->timeout = intval($timeout);
     }
-
   }
 
   public function getTimeout()
   {
     return $this->timeout;
+  }
+
+  public function setConnectTimeout($connectTimeout)
+  {
+    if (is_numeric($connectTimeout)) {
+      $this->connectTimeout = intval($connectTimeout);
+    }
+  }
+
+  public function getConnectTimeout()
+  {
+    return $this->connectTimeout;
   }
 
   public function setRetry($retry)
@@ -150,7 +186,8 @@ class HttpClient implements HttpClientInterface
     curl_setopt($this->curl, CURLOPT_POSTFIELDS, $postBody);
 
     curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, $this->timeout);
+    curl_setopt($this->curl, CURLOPT_TIMEOUT, $this->timeout);
+    curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, $this->connectTimeout);
 
     //curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, 0);
     //curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, FALSE);
