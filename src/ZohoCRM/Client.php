@@ -253,6 +253,30 @@ class Client
     return $this->call('updateRecords', $params, $data);
   }
 
+  /**
+   * Implements getRelatedRecords API method.
+   *
+   * @param string $id              Id of the record for which to fetch related records.
+   * @param string $parentModule    Name of the Zoho Module for which to fetch related records.
+   *                                Example: If you want to fetch Leads related to a Campaign,
+   *                                         then Campaigns is a parent module.
+   * @param array $params           request parameters
+   *                                fromIndex     Integer Default value 1
+   *                                toIndex       Integer Default value 20
+   *                                                      Maximum value 200
+   *                                newFormat     Integer 1 - exclude fields with null values from the response (default)
+   *                                                      2 - include fields with null values in the response
+   *
+   * @return Response The Response object
+   */
+  public function getRelatedRecords($id, $parentModule, $params = array())
+  {
+    $params['id'] = $id;
+    $params['parentModule'] = $parentModule;
+
+    return $this->call('getRelatedRecords', $params);
+  }
+
   public function getModule()
   {
     return $this->module;
