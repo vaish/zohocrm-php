@@ -205,7 +205,15 @@ class Response
 
     if ($this->method == 'getRecordById') {
       $id = strtoupper(substr($this->module, 0, -1)) .'ID';
-      $this->recordId = $this->records[1][$id];
+      if (isset($this->records[1][$id])) {
+        $this->recordId = $this->records[1][$id];
+      }
+      elseif ($this->records[1]['id']) {
+        $this->recordId = $this->records[1]['id'];
+      }
+      elseif (isset($this->records[1]['ACTIVITYID'])) {
+        $this->recordId = $this->records[1]['ACTIVITYID'];
+      }
     }
   }
 
