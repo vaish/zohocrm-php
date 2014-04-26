@@ -223,7 +223,8 @@ class Client
   /**
    * Implements updateRecords API method.
    *
-   * @param string $id       unique ID of the record to be updated
+   * @param string $id       ID of the record to be updated.
+   *                         Set it to NULL when updating multiple records.
    * @param array  $data     xmlData represented as an array
    *                         array will be converted into XML before sending the request
    * @param array  $params   request parameters
@@ -239,7 +240,7 @@ class Client
    */
   public function updateRecords($id, $data, $params = array())
   {
-    if (count($data['records']) > 1) {
+    if (is_null($id)) {
       // Version 4 is mandatory for updating multiple records.
       $params['version'] = 4;
     }
