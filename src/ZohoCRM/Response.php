@@ -251,5 +251,22 @@ class Response
     }
     ksort($records);
     $this->records = $records;
+
+    if (count($records) == 1) {
+      $record = reset($records);
+      $this->code = $record['code'];
+      $this->recordId = $record['Id'];
+      switch ($this->code) {
+        case 2000:
+          $this->message = 'Record Added Successfully.';
+          break;
+        case '2001':
+          $this->message = 'Record Updated Successfully.';
+          break;
+        case '2002':
+          $this->message = 'Record Already Exists.';
+          break;
+      }
+    }
   }
 }
