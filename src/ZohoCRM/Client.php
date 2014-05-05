@@ -240,11 +240,12 @@ class Client
    */
   public function updateRecords($id, $data, $params = array())
   {
-    if (is_null($id)) {
+    if (empty($id) || count($data['records']) > 1) {
       // Version 4 is mandatory for updating multiple records.
       $params['version'] = 4;
     }
-    else {
+
+    if (!isset($params['version']) || $params['version'] != 4) {
       if (empty($id)) {
         throw new \InvalidArgumentException('Record Id is required and cannot be empty.');
       }
