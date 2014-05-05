@@ -255,9 +255,9 @@ class Response
     if (count($records) == 1) {
       $record = reset($records);
       $this->code = $record['code'];
-      $this->recordId = $record['Id'];
+      $this->recordId = isset($record['Id']) ? $record['Id'] : '';
       switch ($this->code) {
-        case 2000:
+        case '2000':
           $this->message = 'Record Added Successfully.';
           break;
         case '2001':
@@ -266,6 +266,8 @@ class Response
         case '2002':
           $this->message = 'Record Already Exists.';
           break;
+        default:
+          $this->message = isset($record['message']) ? $record['message'] : '';
       }
     }
   }
