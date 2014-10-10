@@ -164,6 +164,34 @@ class Client
   }
 
   /**
+   * Implements getSearchRecordsByPDC API method.
+   *
+   * @param string $searchColumn    search column
+   *                                e.g. Email or First Name
+   * @param string $searchValue     search value
+   *                                e.g. John
+   * @param array $params           request parameters
+   *                                selectColumns String  Module(columns) e.g. Leads(Last Name,Website,Email)
+   *                                                      Note: do not use any extra spaces when listing column names
+   *                                newFormat     Integer 1 (default) - exclude fields with null values in the response
+   *                                                      2 - include fields with null values in the response
+   *                                version       Integer 1 (default) - use earlier API implementation
+   *                                                      2 - use latest API implementation
+   *
+   * @return Response The Response object
+   */
+  public function getSearchRecordsByPDC($searchColumn, $searchValue, $params = array())
+  {
+    $params['searchColumn'] = $searchColumn;
+    $params['searchValue'] = $searchValue;
+    if(empty($params['selectColumns'])) {
+      $params['selectColumns'] = 'All';
+    }
+    
+    return $this->call('getSearchRecordsByPDC', $params);
+  }
+  
+  /**
    * Implements getUsers API method.
    *
    * @param string  $type       type of the user to return. Possible values:
